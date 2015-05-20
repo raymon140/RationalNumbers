@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<script type="text/javascript">
+
+    
+    $(document).ready(function ()
+    {
+
+        $.validator.addMethod("validateInput", function (value, element, param) {
+            var reg = /^([-]?\d[/][-]?\d)\s{1}([-]?\d[/][-]?\d)$/;
+            if (reg.test($("#txtInput").val())) 
+                return true;
+            
+            else 
+                return false;            
+        });
+
+
+       $('#rationalForm').validate({
+            rules: {
+                txtInput: {
+                    validateInput: true
+                }
+            },
+            messages: {
+                txtInput: {
+                    validateInput: "Invalid format"
+                }
+            }
+        });
+    });
+
+</script>
+
+       
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "rationalForm", @class = "content-wrapper" }))
+    {      
+        
+        <fieldset>
+        <legend>area</legend>
+
+        <div class="editor-label">
+            <br />
+            @Html.Label("Input:")                
+            <input type="text" id="txtInput" name="txtInput" />   
+           
+        </div>        
+
+        <p>
+            <button id="btnsubmit">Calculate</button>
+        </p>
+
+        <div class="editor-field">
+            <textarea id="resultText" >@ViewData["Result"]</textarea>
+        </div>
+    </fieldset>
+        
+        
+          
+       
+               
+            
+          
+    }   
+
+
+
+
+
+@*@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+          
+        </div>
+    </section>
+}*@
+
